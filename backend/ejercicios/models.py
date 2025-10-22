@@ -30,6 +30,7 @@ class Intento(models.Model):
     tiempo_segundos = models.IntegerField(blank=True, null=True)
     completado = models.BooleanField(default=False)
     puntuacion_obtenida = models.IntegerField(default=0)
+    puntuacion_maxima = models.IntegerField(default=0)
     porcentaje_acierto = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
 
     def __str__(self):

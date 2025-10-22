@@ -41,6 +41,11 @@ class CircuitoGenerado(models.Model):
         verbose_name_plural = 'Circuitos Generados'
         ordering = ['-fecha_generacion']
 
+TIPO_PREGUNTA_CHOICES = [
+    ('multiple_choice', 'Opción Múltiple'),
+    ('numerica', 'Numérica'),
+    ('texto', 'Texto'),
+]
 
 class PreguntaGenerada(models.Model):
     circuito = models.ForeignKey(CircuitoGenerado, on_delete=models.CASCADE, related_name='preguntas')
