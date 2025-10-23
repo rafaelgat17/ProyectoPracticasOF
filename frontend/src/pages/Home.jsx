@@ -1,36 +1,25 @@
-// Importar hooks de React
 import { useState, useEffect } from 'react';
 
-// Importar la función para obtener bloques
 import { obtenerBloques } from '../services/api';
 
 // Importar Link de react-router (lo instalaremos después)
 // import { Link } from 'react-router-dom';
 
 function Home() {
-  // Estado para guardar los bloques
-  // Usa useState, inicializa como array vacío
-  const [bloques, setBloques] = useState(/* ¿Qué va aquí? */);
+  const [bloques, setBloques] = useState([]);
   
-  // Estado para loading
-  const [loading, setLoading] = useState(/* ¿true o false? */);
+  const [loading, setLoading] = useState(true);
   
-  // Estado para errores
   const [error, setError] = useState(null);
   
-  // useEffect para cargar los bloques al montar el componente
   useEffect(() => {
-    // Función asíncrona para cargar datos
     const cargarBloques = async () => {
       try {
         setLoading(true);
         
-        // Llamar a la API
         const response = await obtenerBloques();
         
-        // Guardar los bloques en el estado
-        // Los datos vienen en response.data
-        setBloques(/* ¿Qué poner? */);
+        setBloques(response.data);
         
         setError(null);
       } catch (err) {
@@ -42,9 +31,8 @@ function Home() {
     };
     
     cargarBloques();
-  }, []); // Array vacío = solo se ejecuta al montar
+  }, []); 
   
-  // Renderizado condicional
   if (loading) {
     return <div>Cargando bloques...</div>;
   }

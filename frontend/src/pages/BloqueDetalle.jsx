@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Para obtener el ID de la URL
+import { useParams } from 'react-router-dom';
 import { obtenerBloque, generarEjercicio } from '../services/api';
 
 function BloqueDetalle() {
-  // Obtener el ID del bloque desde la URL
   const { id } = useParams();
-  
-  // Estados
+
   const [bloque, setBloque] = useState(null);
   const [circuito, setCircuito] = useState(null);
   const [loading, setLoading] = useState(true);
   const [generando, setGenerando] = useState(false);
   const [error, setError] = useState(null);
   
-  // Cargar el bloque al montar
   useEffect(() => {
     const cargarBloque = async () => {
       try {
@@ -31,15 +28,12 @@ function BloqueDetalle() {
     cargarBloque();
   }, [id]);
   
-  // Función para generar ejercicio
   const handleGenerarEjercicio = async () => {
     try {
       setGenerando(true);
       
-      // Llamar a la API
       const response = await generarEjercicio(id);
       
-      // Guardar el circuito generado
       setCircuito(response.data);
       
       console.log('Circuito generado:', response.data);
@@ -52,7 +46,6 @@ function BloqueDetalle() {
     }
   };
   
-  // Renderizado
   if (loading) return <div>Cargando bloque...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!bloque) return <div>Bloque no encontrado</div>;
